@@ -8,11 +8,11 @@ const loginBtn = document.getElementById('loginBtn');
 const errorMsg = document.getElementById('errorMsg');
 const rememberMe = document.getElementById('rememberMe');
 
-// Vérification automatique si utilisateur "souvenu"
+// VÃ©rification automatique si utilisateur "souvenu"
 window.onload = () => {
     const rememberedUser = localStorage.getItem('dgiUser');
     if (rememberedUser) {
-        window.location.href = 'index.html'; // redirection automatique
+        window.location.href = 'dashboard.html'; // redirection automatique
     }
 };
 
@@ -25,7 +25,7 @@ loginBtn.addEventListener('click', () => {
     if (user) {
         errorMsg.style.display = 'none';
 
-        // Si "se souvenir de moi" est coché, stocker dans localStorage
+        // Si "se souvenir de moi" est cochÃ©, stocker dans localStorage
         if (rememberMe.checked) {
             localStorage.setItem('dgiUser', username);
         }
@@ -43,7 +43,8 @@ loginBtn.addEventListener('click', () => {
     }
 });
 
-// Soumission avec Entrée
+// Soumission avec EntrÃ©e
 document.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') loginBtn.click();
 });
+
