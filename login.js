@@ -34,7 +34,7 @@ loginBtn.addEventListener('click', () => {
         loginBtn.textContent = 'Connexion...';
         loginBtn.disabled = true;
         setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'dashboard.html';
         }, 800);
     } else {
         errorMsg.style.display = 'block';
@@ -47,4 +47,5 @@ loginBtn.addEventListener('click', () => {
 document.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') loginBtn.click();
 });
+
 
