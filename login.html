@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion – DGI</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Body et animation fade-in */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #e53935, #b71c1c); /* rouge dégradé */
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Container login */
+        .login-container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 10px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container img {
+            width: 60px;
+            margin-bottom: 15px;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #b71c1c; /* titre rouge */
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #e53935; /* bouton rouge */
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+            .login-container button:hover {
+                background: #b71c1c;
+            }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+
+            .remember-me input {
+                margin-right: 5px;
+            }
+
+        .login-footer {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* Animation fade-out */
+        .fade-out {
+            animation: fadeOut 0.8s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <img src="logo.png" alt="Logo DGI">
+        <h2>Connexion DGI</h2>
+
+        <input type="text" id="username" placeholder="Nom d'utilisateur">
+        <input type="password" id="password" placeholder="Mot de passe">
+
+        <div class="remember-me">
+            <input type="checkbox" id="rememberMe">
+            <label for="rememberMe">Se souvenir de moi</label>
+        </div>
+
+        <button id="loginBtn">Se connecter</button>
+        <div class="error-msg" id="errorMsg">Nom d'utilisateur ou mot de passe incorrect</div>
+        <div class="login-footer">© 2025 DGI - Tous droits réservés</div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
