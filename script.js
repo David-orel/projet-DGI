@@ -1,83 +1,56 @@
-// -------------------------------
-// HAMBURGER POUR MOBILE
-// -------------------------------
-const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('sidebar');
+// Simuler des utilisateurs (pour prototype)
+const users = [
+    { username: 'eddy', password: 'dgi123' },
+    { username: 'david', password: 'dgi456' }
+];
 
-hamburger.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-    hamburger.classList.toggle('active');
-});
+const loginBtn = document.getElementById('loginBtn');
+const errorMsg = document.getElementById('errorMsg');
+const rememberMe = document.getElementById('rememberMe');
+const loginContainer = document.querySelector('.login-container');
 
-// -------------------------------
-// CHANGEMENT DE SECTION AU CLIC
-// -------------------------------
-const menuItems = document.querySelectorAll('#menu li');
-const sections = document.querySelectorAll('.section');
+// Redirection automatique si "Se souvenir de moi" est activé
+window.onload = () => {
+    const rememberedUser = localStorage.getItem('dgiUser');
+    if (rememberedUser) {
+        window.location.href = 'index.html';
+    }
+};
 
-function showSection(sectionId) {
-    // Cacher toutes les sections
-    sections.forEach(section => section.classList.remove('active'));
+// Fonction de connexion
+function login() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-    // Afficher la section demandée
-    const target = document.getElementById(sectionId);
-    if (target) target.classList.add('active');
+    const user = users.find(u => u.username === username && u.password === password);
 
-    // Mettre à jour le menu actif
-    menuItems.forEach(item => {
-        item.classList.toggle('active', item.dataset.section === sectionId);
-    });
+    if (user) {
+        errorMsg.style.display = 'none';
 
-    // Générer le graphique si c'est la section statistiques
-    if (sectionId === 'statistiques') {
-        renderStatisticsChart();
+        // Stocker dans localStorage si "Se souvenir de moi"
+        if (rememberMe.checked) {
+            localStorage.setItem('dgiUser', username);
+        }
+
+        // Animation fade-out avant redirection
+        loginContainer.classList.add('fade-out');
+        loginBtn.textContent = 'Connexion...';
+        loginBtn.disabled = true;
+
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 800); // durée de l'animation
+    } else {
+        errorMsg.style.display = 'block';
+        loginBtn.textContent = 'Se connecter';
+        loginBtn.disabled = false;
     }
 }
 
-// Menu sidebar
-menuItems.forEach(item => {
-    item.addEventListener('click', () => {
-        showSection(item.dataset.section);
-    });
+// Événement clic sur bouton
+loginBtn.addEventListener('click', login);
+
+// Soumission avec Entrée
+document.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') login();
 });
-
-// Topbar buttons
-document.querySelectorAll('.top-actions button').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const sectionId = btn.getAttribute('onclick').match(/'(.+?)'/)[1];
-        showSection(sectionId);
-    });
-});
-
-// -------------------------------
-// GRAPHIQUE STATISTIQUES
-// -------------------------------
-let chartInstance; // pour éviter de créer plusieurs charts
-
-function renderStatisticsChart() {
-    const ctx = document.getElementById('chart').getContext('2d');
-
-    // Si un graphique existe déjà, on le détruit pour recréer
-    if (chartInstance) chartInstance.destroy();
-
-    chartInstance = new Chart(ctx, {
-        type: 'bar', // type de graphique : barres
-        data: {
-            labels: ['Productivité', 'Ponctualité', 'Rendement'],
-            datasets: [{
-                label: 'Score (%)',
-                data: [87, 93, 78],
-                backgroundColor: ['#4caf50', '#2196f3', '#ff9800']
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100
-                }
-            }
-        }
-    });
-}
