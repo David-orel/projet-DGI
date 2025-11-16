@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard – DGI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HAMBURGER POUR MOBILE -->
+    <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo DGI" class="sidebar-logo">
+            <h2>DGI</h2>
+        </div>
+
+        <ul id="menu">
+            <li class="active" data-section="accueil">🏠 Accueil</li>
+            <li data-section="paie">💰 Bulletins de paie</li>
+            <li data-section="affectations">📋 Affectations</li>
+            <li data-section="conges">🌴 Congés</li>
+            <li data-section="formations">🎓 Formations</li>
+            <li data-section="promotions">⬆️ Promotions</li>
+            <li data-section="notifications">🔔 Notifications</li>
+            <li data-section="taches">🧾 Tâches</li>
+            <li data-section="statistiques">📊 Statistiques</li>
+            <!-- <li data-section="profil">🧑‍💼 Profil</li>
+            <li data-section="gesttache">🗂️ Gestion des tâches</li>
+            <li data-section="recherche">🔍 Recherche</li> -->
+            <li data-section="presence">📅 Gestion des présences</li>
+        </ul>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="main">
+        <!-- TOPBAR MODERNE -->
+        <header class="topbar">
+            <div class="welcome">
+                <img src="logo.png" alt="Logo" class="top-logo">
+                <div class="welcome-text">
+                    <h1>
+                        Bienvenue, BUKASA LUTUMBA Johnny (ATA1) 
+                    </h1>
+                    <span class="tax-number">Vérificateur Polyvalent des Impôts</span>
+                    <span class="tax-number">N°Impôt : 600.235</span>
+                </div>
+
+            </div>
+            <div class="top-actions">
+                <button onclick="showSection('profil')">🧑‍💼 Profil</button>
+                <button onclick="showSection('recherche')">🔍 Recherche</button>
+                <button onclick="showSection('taches')">🗂️ Tâches</button>
+            </div>
+        </header>
+
+        <!-- SECTIONS -->
+        <section id="accueil" class="section active">
+            <h2>Vue d’ensemble</h2>
+            <div class="cards">
+                <div class="card"><h3>Productivité</h3><p class="value">87%</p></div>
+                <div class="card"><h3>Ponctualité</h3><p class="value">93%</p></div>
+                <div class="card"><h3>Rendement</h3><p class="value">78%</p></div>
+            </div>
+        </section>
+
+        <section id="paie" class="section">
+            <h2>Bulletins de paie</h2>
+            <table>
+                <tr><th>Mois</th><th>Action</th></tr>
+                <tr><td>Octobre 2025</td><td><button>Télécharger</button></td></tr>
+                <tr><td>Septembre 2025</td><td><button>Télécharger</button></td></tr>
+            </table>
+        </section>
+
+        <section id="affectations" class="section">
+            <h2>Affectations</h2>
+            <ul>
+                <li>Poste actuel : Chef de Section Fiscalité</li>
+                <li>Direction : Administration Centrale</li>
+            </ul>
+        </section>
+
+        <section id="conges" class="section">
+            <h2>Congés</h2>
+            <p>Solde disponible : <strong>15 jours</strong></p>
+            <button>Demander un congé</button>
+        </section>
+
+        <section id="formations" class="section">
+            <h2>Formations</h2>
+            <p>Aucune formation prévue actuellement.</p>
+        </section>
+
+        <section id="promotions" class="section">
+            <h2>Promotions</h2>
+            <p>Dernière promotion : Juin 2023</p>
+        </section>
+
+        <section id="notifications" class="section">
+            <h2>Notifications administratives</h2>
+            <ul>
+                <li>📢 Nouvelle note de service : mise à jour des procédures fiscales.</li>
+                <li>✅ Validation congé du 14–18 Octobre.</li>
+            </ul>
+        </section>
+
+        <section id="taches" class="section">
+            <h2>Gestion des tâches</h2>
+            <ul class="tasks">
+                <li>✔️ Rapport fiscal hebdomadaire</li>
+                <li>🕒 Dossier contribuables A à Z</li>
+                <li>⚠️ Mise à jour registre unité</li>
+            </ul>
+        </section>
+
+        <section id="statistiques" class="section">
+            <h2>Statistiques de rendement</h2>
+            <canvas id="chart" width="600" height="300"></canvas>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+</html>
