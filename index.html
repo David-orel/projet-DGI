@@ -1,26 +1,26 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard – DGI</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!-- HAMBURGER POUR MOBILE -->
+    <!-- Hamburger pour mobile -->
     <div class="hamburger" id="hamburger">
         <div></div>
         <div></div>
         <div></div>
     </div>
 
-    <!-- SIDEBAR -->
+    <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
         <div class="logo">
             <img src="logo.png" alt="Logo DGI" class="sidebar-logo">
             <h2>DGI</h2>
         </div>
-
         <ul id="menu">
             <li class="active" data-section="accueil">🏠 Accueil</li>
             <li data-section="paie">💰 Bulletins de paie</li>
@@ -31,36 +31,30 @@
             <li data-section="notifications">🔔 Notifications</li>
             <li data-section="taches">🧾 Tâches</li>
             <li data-section="statistiques">📊 Statistiques</li>
-            <!-- <li data-section="profil">🧑‍💼 Profil</li>
-            <li data-section="gesttache">🗂️ Gestion des tâches</li>
-            <li data-section="recherche">🔍 Recherche</li> -->
-            <li data-section="presence">📅 Gestion des présences</li>
+
         </ul>
     </aside>
 
-    <!-- CONTENU PRINCIPAL -->
+    <!-- Contenu principal -->
     <main class="main">
-        <!-- TOPBAR MODERNE -->
+        <!-- Topbar -->
         <header class="topbar">
             <div class="welcome">
                 <img src="logo.png" alt="Logo" class="top-logo">
                 <div class="welcome-text">
-                    <h1>
-                        Bienvenue, BUKASA LUTUMBA Johnny (ATA1) 
-                    </h1>
+                    <h1>Bienvenue, BUKASA LUTUMBA Johnny (ATA1)</h1>
                     <span class="tax-number">Vérificateur Polyvalent des Impôts</span>
                     <span class="tax-number">N°Impôt : 600.235</span>
                 </div>
-
             </div>
             <div class="top-actions">
-                <button onclick="showSection('profil')">🧑‍💼 Profil</button>
-                <button onclick="showSection('recherche')">🔍 Recherche</button>
-                <button onclick="showSection('taches')">🗂️ Tâches</button>
+                <button data-section="profil">🧑‍💼 Profil</button>
+                <button data-section="recherche">🔍 Recherche</button>
+                <button data-section="taches">🗂️ Tâches</button>
             </div>
         </header>
 
-        <!-- SECTIONS -->
+        <!-- Sections -->
         <section id="accueil" class="section active">
             <h2>Vue d’ensemble</h2>
             <div class="cards">
@@ -124,10 +118,55 @@
             <h2>Statistiques de rendement</h2>
             <canvas id="chart" width="600" height="300"></canvas>
         </section>
+
+        <section id="profil" class="section">
+            <h2>Profil</h2>
+            <p>Nom : BUKASA LUTUMBA Johnny</p>
+            <p>Poste : Vérificateur Polyvalent des Impôts</p>
+            <p>N°Impôt : 600.235</p>
+        </section>
+
+        <section id="recherche" class="section">
+            <h2>Recherche</h2>
+            <p>Fonctionnalité de recherche ici.</p>
+        </section>
     </main>
 
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuItems = document.querySelectorAll("#menu li");
+            const topButtons = document.querySelectorAll(".top-actions button");
+            const sections = document.querySelectorAll(".section");
+            const hamburger = document.getElementById("hamburger");
+            const sidebar = document.getElementById("sidebar");
+
+            function showSection(id) {
+                sections.forEach(sec => sec.classList.toggle("active", sec.id === id));
+                menuItems.forEach(item => item.classList.toggle("active", item.dataset.section === id));
+                if (window.innerWidth <= 768) sidebar.classList.remove("visible");
+            }
+
+            menuItems.forEach(item => item.addEventListener("click", () => showSection(item.dataset.section)));
+            topButtons.forEach(btn => btn.addEventListener("click", () => showSection(btn.dataset.section)));
+
+            hamburger.addEventListener("click", () => sidebar.classList.toggle("visible"));
+
+            // Graphique Chart.js
+            const ctx = document.getElementById('chart');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Rendement',
+                        data: [87, 93, 78, 85, 90],
+                        backgroundColor: '#d32f2f'
+                    }]
+                },
+                options: { responsive: true }
+            });
+        });
+    </script>
 
 </body>
 </html>
